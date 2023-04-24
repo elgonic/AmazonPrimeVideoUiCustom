@@ -1,7 +1,7 @@
 console.log("Fire!!!");
 
 const main = () => {
-  const terget = document.querySelector(".fkpovp9.f8hspre") ;
+  const terget = document.querySelector(".fkpovp9.f8hspre");
   const terget2 = document.querySelector(".f124tp54.fz8eask.f12x3de4");
   const terget3 = document.querySelector(".atvwebplayersdk-overlays-container");
   const terget4 = document.querySelector(
@@ -33,16 +33,15 @@ const main = () => {
   //  console.log("terget3 dont have f1sp4gm7");
   //  terget3.classList.add("f1sp4gm7");
   //}
-   //addHideClass(terget4);
-   
+  //addHideClass(terget4);
+
   // addHideClass(terget5);
   // addHideClass(terget6);
   // addHideClass(terget7);
   // addHideClass(terget8);
   // gui.style.cursor = "none";
-    //parentVisibilityHidden(terget3)
-   //parentVisibilityHidden(terget4);
-
+  //parentVisibilityHidden(terget3)
+  //parentVisibilityHidden(terget4);
 };
 
 const waitLoadPage = () => {
@@ -55,16 +54,15 @@ const waitLoadPage = () => {
 };
 
 const addHideClass = (element) => {
-    if(!element) return;
-    if(element.classList.contains("hide")) return ;
-    element.classList.add("hide");
-}
+  if (!element) return;
+  if (element.classList.contains("hide")) return;
+  element.classList.add("hide");
+};
 
 const parent = (element) => {
-    console.log("parentElement")
-    //element.parentElement.style.visibility = "hidden";
-    //element.parentElement.style.display = "none";
-    element.parentElement.style.opacity = 0;
-
-}
+  console.log("parentElement");
+  //element.parentElement.style.visibility = "hidden";
+  //element.parentElement.style.display = "none";
+  element.parentElement.style.opacity = 0;
+};
 setInterval(waitLoadPage, 1000);

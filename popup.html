@@ -1,6 +1,8 @@
 <!-- popup.html -->
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="style.css">
+
 <head>
   <meta charset="UTF-8">
   <style>
@@ -11,12 +13,18 @@
     }
   </style>
 </head>
+
 <body>
+  <script src="popup.js"></script>
   <p>Hello, world!</p>
   <label for="switch" class="switch_label">
-    <input type="checkbox" id="switch" />
-    <div class="base"></div>
-    スイッチ
+    <div class="switch">
+      <input type="checkbox" id="switch" />
+      <div class="circle"></div>
+      <div class="base"></div>
+    </div>
+    <span class="title">OFF</span>
   </label>
 </body>
+
 </html>
