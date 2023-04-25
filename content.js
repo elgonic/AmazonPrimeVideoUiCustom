@@ -1,4 +1,3 @@
-console.log("Fire!!!");
 
 const main = () => {
   const terget = document.querySelector(".fkpovp9.f8hspre");
@@ -47,6 +46,9 @@ const main = () => {
 const waitLoadPage = () => {
   const terget = document.querySelector(".atvwebplayersdk-closebutton-wrapper");
   if (terget) {
+    chrome.storage.local.get(["isActivate"],(value) => {
+      console.log("aaaaaaaaaaaaaaaaaaaaaa"+value);
+    })
     console.log("terget Hit!!");
     clearInterval();
     setInterval(main, 100);
