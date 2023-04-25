@@ -47,6 +47,9 @@ const main = () => {
 const waitLoadPage = () => {
   const terget = document.querySelector(".atvwebplayersdk-closebutton-wrapper");
   if (terget) {
+    chrome.storage.local.get("aaa",(value) => {
+      console.log("aaaaaaaaaaaaaaaaaaaaaa"+value);
+    })
     console.log("terget Hit!!");
     clearInterval();
     setInterval(main, 100);
