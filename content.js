@@ -1,4 +1,3 @@
-console.log("Fire!!!");
 
 const main = () => {
   const terget = document.querySelector(".fkpovp9.f8hspre");
@@ -47,7 +46,11 @@ const main = () => {
 const waitLoadPage = () => {
   const terget = document.querySelector(".atvwebplayersdk-closebutton-wrapper");
   if (terget) {
+<<<<<<< HEAD
     chrome.storage.local.get("aaa",(value) => {
+=======
+    chrome.storage.local.get(["isActivate"],(value) => {
+>>>>>>> 0deb9f8001ae8fdd211e2f717ce2e496f7ebe86d
       console.log("aaaaaaaaaaaaaaaaaaaaaa"+value);
     })
     console.log("terget Hit!!");
