@@ -24,20 +24,19 @@ const main = () => {
   //これで暗くならない
   addHideClass(terget);
   //ぐるぐるを消す
-  terget9.style.opacity = 0;
-  //画面上部のタイトルが消える
+  if(terget9?.style?.opacity)  terget9.style.opacity= 0;
+  //画面上部のタイトルが消える <= タイトル確認できず
   //addHideClass(terget2);
   //分からん
-  //if (!terget3.classList.contains("f1sp4gm7")) {
-  //  console.log("terget3 dont have f1sp4gm7");
-  //  terget3.classList.add("f1sp4gm7");
-  //}
-  //addHideClass(terget4);
-
-  // addHideClass(terget5);
-  // addHideClass(terget6);
-  // addHideClass(terget7);
-  // addHideClass(terget8);
+  if (!terget3.classList.contains("f1sp4gm7")) {
+    console.log("terget3 dont have f1sp4gm7");
+    terget3.classList.add("f1sp4gm7");
+  }
+  addHideClass(terget4);
+  addHideClass(terget5);
+  addHideClass(terget6);
+  addHideClass(terget7);
+  addHideClass(terget8);
   // gui.style.cursor = "none";
   //parentVisibilityHidden(terget3)
   //parentVisibilityHidden(terget4);
@@ -46,10 +45,13 @@ const main = () => {
 const waitLoadPage = () => {
   const terget = document.querySelector(".atvwebplayersdk-closebutton-wrapper");
   if (terget) {
-    chrome.storage.local.get(["isActivate"]).then(result => {
+    chrome.storage.local.get(null).then(configData => {
+      //For First set up 
+      if(Object.keys(configData).length === 0) return;
       console.log("terget Hit!!");
-      console.log(`isActivate = ${result["isActivate"]}`);
-      if(!result["isActivate"]) return ;
+      console.log(`isActivate = ${configData["isActivate"]}`);
+      if(!configData["isActivate"]) return ;
+      console.log("Aaa")
       clearInterval();
       setInterval(main, 100);
     })
@@ -57,7 +59,9 @@ const waitLoadPage = () => {
 };
 
 const addHideClass = (element) => {
+  console.log("addHIdeclas")
   if (!element) return;
+  console.log(`${element}HIDE!`)
   if (element.classList.contains("hide")) return;
   element.classList.add("hide");
 };
