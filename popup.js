@@ -1,6 +1,7 @@
 window.onload = () => {
   const sliderAboutActivate = document.querySelector("#switch");
   const sliderAboutPreventDarkening = document.querySelector("#switch2");
+  const sliderAboutHidePlayButton = document.querySelector("#switch3");
   //Check local storage data
   chrome.storage.local.get(null).then((configData) => {
     console.log(configData["isActivate"]);
@@ -11,9 +12,12 @@ window.onload = () => {
       configData["isActivate"];
     sliderAboutActivate.querySelector(".title").textContent =
       sliderAboutActivate.querySelector("input").checked ? "ON" : "OFF";
-      
+
     sliderAboutPreventDarkening.querySelector("input").checked =
       configData["isPreventDarkening"];
+    sliderAboutHidePlayButton.querySelector("input").checked =
+      configData["isHidePlaypauseButton"];
+
     // Main Process
     sliderAboutActivate
       .querySelector("input")
@@ -25,12 +29,19 @@ window.onload = () => {
           : "OFF";
         chrome.storage.local.set({ ["isActivate"]: checkboxStatus });
       });
-    sliderAboutPreventDarkening
+     sliderAboutPreventDarkening
       .querySelector("input")
       .addEventListener("click", (event) => {
         const checkboxStatus = event.currentTarget.checked;
         console.log(checkboxStatus);
         chrome.storage.local.set({ ["isPreventDarkening"]: checkboxStatus });
+      });   
+      sliderAboutHidePlayButton
+      .querySelector("input")
+      .addEventListener("click", (event) => {
+        const checkboxStatus = event.currentTarget.checked;
+        console.log(checkboxStatus);
+        chrome.storage.local.set({ ["isHidePlaypauseButton"]: checkboxStatus });
       });
   });
 };
