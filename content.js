@@ -22,21 +22,24 @@ const main = () => {
   const gui = document.querySelector(".ffszj3z.f8hspre.f1icw8u");
 
   //これで暗くならない
-  addHideClass(terget);
+  //addHideClass(terget);
   //ぐるぐるを消す
-  if(terget9?.style?.opacity)  terget9.style.opacity= 0;
+  if(terget9?.style)  {
+    console.log("消してるはず")
+terget9.style.opacity= 0;
+  }  
   //画面上部のタイトルが消える <= タイトル確認できず
   //addHideClass(terget2);
   //分からん
-  if (!terget3.classList.contains("f1sp4gm7")) {
-    console.log("terget3 dont have f1sp4gm7");
-    terget3.classList.add("f1sp4gm7");
-  }
-  addHideClass(terget4);
-  addHideClass(terget5);
-  addHideClass(terget6);
-  addHideClass(terget7);
-  addHideClass(terget8);
+ // if (!terget3.classList.contains("f1sp4gm7")) {
+ //   console.log("terget3 dont have f1sp4gm7");
+ //   terget3.classList.add("f1sp4gm7");
+ // }
+  //addHideClass(terget4);
+  //addHideClass(terget5);
+  //addHideClass(terget6);
+  //addHideClass(terget7);
+  //addHideClass(terget8);
   // gui.style.cursor = "none";
   //parentVisibilityHidden(terget3)
   //parentVisibilityHidden(terget4);
@@ -51,12 +54,16 @@ const waitLoadPage = () => {
       console.log("terget Hit!!");
       console.log(`isActivate = ${configData["isActivate"]}`);
       if(!configData["isActivate"]) return ;
-      console.log("Aaa")
-      clearInterval();
+    //  const tmp = document.querySelector(".f1la87wm");
+    //  console.log(tmp?.style)
+    //  if(tmp?.style) { tmp.style.opacity= 0;}else{console.log("donthittpppp")}
+      clearInterval(intervalID);
       setInterval(main, 100);
     })
   }
 };
+
+
 
 const addHideClass = (element) => {
   console.log("addHIdeclas")
@@ -72,4 +79,24 @@ const parent = (element) => {
   //element.parentElement.style.display = "none";
   element.parentElement.style.opacity = 0;
 };
-setInterval(waitLoadPage, 1000);
+
+
+//発火しない
+//console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+//window.addEventListener("DOMContentLoaded" , () => {
+  //console.log("DOMContentLoaded Fire!")
+  //const tmp = document.querySelector(".f1la87wm");
+  //if(tmp?.style?.opacity)  tmp.style.opacity= 0;
+//})
+
+
+//要素が読み込まれていないようで動かなかった
+//window.onload  = () => {
+//  console.log("Onload Fire!")
+//  const tmp = document.querySelector(".f1la87wm");
+//  console.log(tmp?.style)
+//  if(tmp?.style) { tmp.style.opacity= 0;}else{console.log("donthittpppp")}
+//}
+
+let intervalID;
+if(!intervalID) sintervalID = setInterval(waitLoadPage, 1000);
