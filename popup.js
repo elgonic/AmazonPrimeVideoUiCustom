@@ -6,11 +6,11 @@ window.onload = () => {
   chrome.storage.local.get(null).then((configData) => {
     console.log(configData["isActivate"]);
     console.log(sliderAboutActivate.querySelector("input").checked);
-    console.log(sliderAboutActivate.querySelector(".title").textContent);
+    console.log(sliderAboutActivate.querySelector("span").textContent);
 
     sliderAboutActivate.querySelector("input").checked =
       configData["isActivate"];
-    sliderAboutActivate.querySelector(".title").textContent =
+    sliderAboutActivate.querySelector("span").textContent =
       sliderAboutActivate.querySelector("input").checked ? "ON" : "OFF";
 
     sliderAboutPreventDarkening.querySelector("input").checked =
@@ -29,7 +29,7 @@ window.onload = () => {
       .addEventListener("click", (event) => {
         const checkboxStatus = event.currentTarget.checked;
         console.log(checkboxStatus);
-        sliderAboutActivate.querySelector(".title").textContent = checkboxStatus
+        sliderAboutActivate.querySelector("span").textContent = checkboxStatus
           ? "ON"
           : "OFF";
         chrome.storage.local.set({ ["isActivate"]: checkboxStatus });
