@@ -18,6 +18,11 @@ window.onload = () => {
     sliderAboutHidePlayButton.querySelector("input").checked =
       configData["isHidePlaypauseButton"];
 
+
+    //UI 初期設定
+    controlCheckBoxes(sliderAboutActivate.querySelector("input").checked);
+
+
     // Main Process
     sliderAboutActivate
       .querySelector("input")
@@ -28,15 +33,17 @@ window.onload = () => {
           ? "ON"
           : "OFF";
         chrome.storage.local.set({ ["isActivate"]: checkboxStatus });
+        //UI処理
+        controlCheckBoxes(checkboxStatus);
       });
-     sliderAboutPreventDarkening
+    sliderAboutPreventDarkening
       .querySelector("input")
       .addEventListener("click", (event) => {
         const checkboxStatus = event.currentTarget.checked;
         console.log(checkboxStatus);
         chrome.storage.local.set({ ["isPreventDarkening"]: checkboxStatus });
-      });   
-      sliderAboutHidePlayButton
+      });
+    sliderAboutHidePlayButton
       .querySelector("input")
       .addEventListener("click", (event) => {
         const checkboxStatus = event.currentTarget.checked;
@@ -45,3 +52,23 @@ window.onload = () => {
       });
   });
 };
+
+const controlCheckBoxes= (masterCheckboxStatus) => {
+  const checkBoxes = document.querySelectorAll(".switch_label")
+    let i = 0;
+    checkBoxes.forEach(checkBox => {
+      if(i===0) {
+        i++;
+        return ;
+      } 
+      console.log({masterCheckboxStatus})
+      if(masterCheckboxStatus) {
+        checkBox.querySelector(".circle").classList.remove("circle-disActivate");
+        checkBox.querySelector(".base").classList.remove("base-disActivate");
+      }else{
+        checkBox.querySelector(".circle").classList.add("circle-disActivate");
+        checkBox.querySelector(".base").classList.add("base-disActivate");
+
+      }
+    })
+}

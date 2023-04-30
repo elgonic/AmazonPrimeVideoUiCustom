@@ -1,8 +1,8 @@
 let intervalID;
-if (!intervalID) intervalID = setInterval(waitLoadPage, 1000);
+if (!intervalID) intervalID = setInterval(customizePage, 1000);
 
 
-const waitLoadPage = () => {
+const customizePage = () => {
   //なんとなく中央の再生ボタンが配置されてればページ読み込めているといるだろうという希望的観測
   const terget = document.querySelector(".atvwebplayersdk-playpause-button");
   if (terget) {
@@ -14,6 +14,7 @@ const waitLoadPage = () => {
       if (!configData["isActivate"]) return;
       console.log(`isPreventDarkening = ${configData["isPreventDarkening"]}`);
       if (configData["isPreventDarkening"]) {
+        //serch darkingElement
         const darkingElement = document.querySelector(".fkpovp9.f8hspre");
         console.log("PreventDarkening");
         if (darkingElement?.style) {
@@ -24,6 +25,7 @@ const waitLoadPage = () => {
       }
       console.log(`isHidePlaypauseButton = ${configData["isHidePlaypauseButton"]}`);
       if (configData["isHidePlaypauseButton"]) {
+        //serch PlaypauseButton
         const playStopButton = document.querySelector(".f1aiijcp.fw80uk2");
         console.log("HidePlayStopButton");
         if (playStopButton?.style) {
