@@ -1,5 +1,3 @@
-let intervalID;
-if (!intervalID) intervalID = setInterval(customizePage, 1000);
 
 
 const customizePage = () => {
@@ -48,3 +46,5 @@ const customizePage = () => {
 };
 
 
+let intervalID;
+if (!intervalID) intervalID = setInterval(customizePage, 1000);
