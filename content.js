@@ -1,5 +1,3 @@
-
-
 const customizePage = () => {
   //なんとなく中央の再生ボタンが配置されてればページ読み込めているといるだろうという希望的観測
   const terget = document.querySelector(".atvwebplayersdk-playpause-button");
@@ -17,18 +15,20 @@ const customizePage = () => {
         console.log("PreventDarkening");
         if (darkingElement?.style) {
           darkingElement.style.opacity = 0;
-        }else{
-          sucsessFlag = false; 
+        } else {
+          sucsessFlag = false;
         }
       }
-      console.log(`isHidePlaypauseButton = ${configData["isHidePlaypauseButton"]}`);
+      console.log(
+        `isHidePlaypauseButton = ${configData["isHidePlaypauseButton"]}`
+      );
       if (configData["isHidePlaypauseButton"]) {
         //serch PlaypauseButton
         const playStopButton = document.querySelector(".f1aiijcp.fw80uk2");
         console.log("HidePlayStopButton");
         if (playStopButton?.style) {
           playStopButton.style.opacity = 0;
-        }else {
+        } else {
           successFlag = false;
         }
         //スキップ時のぐるぐるを消す
@@ -36,15 +36,14 @@ const customizePage = () => {
         console.log("HideRoadElement");
         if (roadElement?.style) {
           roadElement.style.opacity = 0;
-        }else{
+        } else {
           successFlag = false;
         }
       }
-      if(successFlag) clearInterval(intervalID);
+      if (successFlag) clearInterval(intervalID);
     });
   }
 };
-
 
 let intervalID;
 if (!intervalID) intervalID = setInterval(customizePage, 1000);

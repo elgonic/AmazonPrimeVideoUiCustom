@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Amazon Prime Video hide play button",
+  "name": "Custom Video UI for Amazon Prime Video",
   "version": "1.0",
-  "description": "Add the reading time to Chrome Extension documentation articles",
+  "description": "By using this extension, you can prevent the screen from darkening  and more  when skipping  while watching amazon prime video.",
   "content_scripts": [
     {
       "js": ["content.js"],
