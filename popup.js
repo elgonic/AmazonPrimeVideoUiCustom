@@ -10,9 +10,12 @@ window.onload = () => {
     console.log(sliderAboutActivate.querySelector("input").checked);
     console.log(sliderAboutActivate.querySelector("span").textContent);
 
-    //ほんとの最初
+    //StartUp
     if (!Object.keys(configData).length) {
+      //ForFirstUp
       chrome.storage.local.set({ ["isActivate"]: sliderAboutActivate.querySelector("input").checked});
+      sliderAboutActivate.querySelector("span").textContent =
+        sliderAboutActivate.querySelector("input").checked ? "ON" : "OFF";
       chrome.storage.local.set({ ["isPreventDarkening"]: sliderAboutPreventDarkening.querySelector("input").checked });
       chrome.storage.local.set({ ["isHidePlaypauseButton"]: sliderAboutHidePlayButton.querySelector("input").checked });
     } else {
