@@ -40,6 +40,16 @@ const customizePage = () => {
           successFlag = false;
         }
       }
+      console.log(`isHideTitle = ${configData["isHideTitle"]}`);
+      if(configData["isHideTitle"]){
+        const  title = document.querySelector(".f3w9jrr.fcckh95");
+        console.log("HideTitle");
+        if(title?.style){
+          title.style.opacity = 0;
+        }else{
+          successFlag = false;
+        }
+      }
       if (successFlag) clearInterval(intervalID);
     });
   }
@@ -47,3 +57,4 @@ const customizePage = () => {
 
 let intervalID;
 if (!intervalID) intervalID = setInterval(customizePage, 1000);
+
