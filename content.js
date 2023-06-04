@@ -1,4 +1,6 @@
+
 const customizePage = () => {
+  console.log("Start CustomUI");
   //なんとなく中央の再生ボタンが配置されてればページ読み込めているといるだろうという希望的観測
   const terget = document.querySelector(".atvwebplayersdk-playpause-button");
   if (terget) {
@@ -52,9 +54,17 @@ const customizePage = () => {
       }
       if (successFlag) clearInterval(intervalID);
     });
+  }else{
+    // if now page is not amazon video 
+    numberOfRepetitions ++ ;
+    if(numberOfRepetitions >= repetitionsLimit) {
+      clearInterval(intervalID);
+    }
   }
 };
 
+let  numberOfRepetitions = 0;
+const repetitionsLimit = 5;
 let intervalID;
-if (!intervalID) intervalID = setInterval(customizePage, 1000);
+if (!intervalID) intervalID = setInterval(customizePage, 1000 );
 
