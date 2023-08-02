@@ -1,4 +1,22 @@
 
+const firstSetup = () => {
+  {
+    //ForFirstUp
+    chrome.storage.local.set({
+      ["isActivate"]: true,
+    });
+    chrome.storage.local.set({
+      ["isPreventDarkening"]:true
+    });
+    chrome.storage.local.set({
+      ["isHidePlaypauseButton"]:true
+    });
+    chrome.storage.local.set({
+      ["isHideTitle"]: true
+    });
+  }
+}
+
 const customizePage = () => {
   console.log("Start CustomUI");
   //なんとなく中央の再生ボタンが配置されてればページ読み込めているといるだろうという希望的観測
@@ -7,7 +25,7 @@ const customizePage = () => {
     let successFlag = true;
     chrome.storage.local.get(null).then((configData) => {
       //For First set up
-      if (Object.keys(configData).length === 0) return;
+      if (Object.keys(configData).length === 0) firstSetup();
       console.log(`isActivate = ${configData["isActivate"]}`);
       if (!configData["isActivate"]) return;
       console.log(`isPreventDarkening = ${configData["isPreventDarkening"]}`);
@@ -62,6 +80,7 @@ const customizePage = () => {
     }
   }
 };
+
 
 let  numberOfRepetitions = 0;
 const repetitionsLimit = 5;

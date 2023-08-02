@@ -1,3 +1,4 @@
+
 window.onload = () => {
   const sliderAboutActivate = document.querySelector("#switch");
   const sliderAboutPreventDarkening = document.querySelector("#switch2");
@@ -10,26 +11,8 @@ window.onload = () => {
     console.log(sliderAboutActivate.querySelector("input").checked);
     console.log(sliderAboutActivate.querySelector("span").textContent);
 
-    //StartUp
-    if (!Object.keys(configData).length) {
-      //ForFirstUp
-      chrome.storage.local.set({
-        ["isActivate"]: sliderAboutActivate.querySelector("input").checked,
-      });
-      sliderAboutActivate.querySelector("span").textContent =
-        sliderAboutActivate.querySelector("input").checked ? "ON" : "OFF";
-      chrome.storage.local.set({
-        ["isPreventDarkening"]:
-          sliderAboutPreventDarkening.querySelector("input").checked,
-      });
-      chrome.storage.local.set({
-        ["isHidePlaypauseButton"]:
-          sliderAboutHidePlayButton.querySelector("input").checked,
-      });
-      chrome.storage.local.set({
-        ["isHideTitle"]: sliderAboutHideTitle.querySelector("input").checked,
-      });
-    } else {
+    //StartUp 多分 content の方で設定してるから !Object.keys(configData).length は使えない
+
       sliderAboutActivate.querySelector("input").checked =
         configData["isActivate"];
       sliderAboutActivate.querySelector("span").textContent =
@@ -41,7 +24,7 @@ window.onload = () => {
         configData["isHidePlaypauseButton"];
       sliderAboutHideTitle.querySelector("input").checked =
         configData["isHideTitle"];
-    }
+    
 
     //UI 初期設定
     controlCheckBoxes(sliderAboutActivate.querySelector("input").checked);
