@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Custom Video UI for Amazon Prime Video",
-  "version": "1.2",
+  "version": "1.3",
   "description": "By using this extension, you can prevent the screen from darkening  and more  when skipping  while watching amazon prime video.",
   "content_scripts": [
     {
