@@ -32,7 +32,8 @@ const customizePage = () => {
 
       //使用する要素検索
       //serch darkingElement
-      const darkingElements = document.querySelectorAll(".fkpovp9.f8hspre");
+      //const darkingElements = document.querySelectorAll(".fkpovp9.f8hspre");
+      const darkingElements = document.querySelectorAll(".f8hspre.f1makowq");
       //serch PlaypauseButton
       const playStopButtons = document.querySelectorAll(".f1aiijcp.fw80uk2");
       //serch skip時のぐるぐる
@@ -112,7 +113,7 @@ const showElements = elements => {
 }
 
 let numberOfRepetitions = 0;
-const repetitionsLimit = 5;
+const repetitionsLimit = 100;
 let intervalID;
-if (!intervalID) intervalID = setInterval(customizePage, 1000);
+if (!intervalID) intervalID = setInterval(customizePage, 100);
 

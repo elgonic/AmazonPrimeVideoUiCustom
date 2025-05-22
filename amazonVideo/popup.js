@@ -11,7 +11,7 @@ window.onload = () => {
     console.log(sliderAboutActivate.querySelector("input").checked);
     console.log(sliderAboutActivate.querySelector("span").textContent);
 
-    ///undefind の時は amazonprimevideのページを1度も開いてない上程で popup を開いたとき -> デフォルトの全部 ON状態でいい
+    ///undefind の時は amazonprimevideのページを1度も開いてない状態で popup を開いたとき -> デフォルトの全部 ON状態でいい
     if(configData["isActivate"] != undefined){
       sliderAboutActivate.querySelector("input").checked =
         configData["isActivate"];
