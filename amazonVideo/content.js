@@ -17,103 +17,101 @@ const firstSetup = () => {
   }
 }
 
-//dv-web-player と dv-web-player-2 の二つの親要素があり、それぞれに .fkpovp9.f8hspre のクラスが存在するので queryselecterAll で両方とって両方消す
-const customizePage = () => {
-  console.log("Start CustomUI");
-  //なんとなく中央の再生ボタンが配置されてればページ読み込めているといるだろうという希望的観測
-  const terget = document.querySelector(".atvwebplayersdk-playpause-button");
-  if (terget) {
-    chrome.storage.local.get(null).then((configData) => {
-      //For First set up
-      if (Object.keys(configData).length === 0) firstSetup();
-      console.log(`isActivate = ${configData["isActivate"]}`);
-
-
-
-      //使用する要素検索
-      //serch darkingElement
-      //const darkingElements = document.querySelectorAll(".fkpovp9.f8hspre");
-      const darkingElements = document.querySelectorAll(".f8hspre.f1makowq");
-      //serch PlaypauseButton
-      const playStopButtons = document.querySelectorAll(".f1aiijcp.fw80uk2");
-      //serch skip時のぐるぐる
-      const roadElements = document.querySelectorAll(".f1la87wm");
-      const titles = document.querySelectorAll(".f3w9jrr.fcckh95");
-
-      //拡張機能の有効 or 無効
-      if (!configData["isActivate"]) {
-        showElements(darkingElements);
-        showElements(playStopButtons);
-        showElements(roadElements);
-        showElements(titles);
-        return;
-      }
-
-      //画面暗くなる関係の処理
-      console.log(`isPreventDarkening = ${configData["isPreventDarkening"]}`);
-      if (configData["isPreventDarkening"]) {
-        console.log("PreventDarkenings");
-        hideElements(darkingElements);
-      } else {
-        console.log("Show Darkenings");
-        showElements(darkingElements);
-      }
-
-      //再生ボタンとかの処理
-      console.log(
-        `isHidePlaypauseButton = ${configData["isHidePlaypauseButton"]}`
-      );
-      if (configData["isHidePlaypauseButton"]) {
-        console.log("HidePlayStopButtons");
-        hideElements(playStopButtons);
-        console.log("HideRoadElement");
-        hideElements(roadElements);
-      } else {
-        console.log("ShowPlayStopButtons");
-        showElements(playStopButtons);
-        console.log("ShowRoadElement");
-        showElements(roadElements);
-
-      }
-
-      //タイトル関係の処理
-      console.log(`isHideTitle = ${configData["isHideTitle"]}`);
-      if (configData["isHideTitle"]) {
-        console.log("HideTitles");
-        hideElements(titles);
-      } else {
-        console.log("ShowTitles");
-        showElements(titles);
-      }
-    });
-  } else {
-    // if now page is not amazon video 
-    numberOfRepetitions++;
-    if (numberOfRepetitions >= repetitionsLimit) {
-      console.log("ClearInterval");
-      clearInterval(intervalID);
-    }
-  }
-};
 
 const hideElements = elements => {
   elements.forEach(element => {
     if (element.style) {
       element.style.opacity = 0;
+      element.style.visibility = "hidden";
+    //  element.style.display = "none";
     }
-  })
+  });
 }
 
 const showElements = elements => {
   elements.forEach(element => {
     if (element.style) {
       element.style.opacity = 1;
+      element.style.visibility = "visible";
+  //    element.style.display = "block";
     }
-  })
+  });
+}
+
+const observer = new MutationObserver(records => {
+
+  console.log("Observe!!");
+
+  chrome.storage.local.get(null).then((configData) => {
+
+    if (Object.keys(configData).length === 0) firstSetup();
+
+    console.log(`isActivate = ${configData["isActivate"]}`);
+
+    records.forEach(record => {
+      record.addedNodes.forEach(node => {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          const parentNode = node.parentElement;
+          const darkingElements = parentNode.querySelectorAll(".f8hspre.f1makowq");
+          const playStopButtons = parentNode.querySelectorAll(".f1aiijcp.fw80uk2");
+          const roadElements = parentNode.querySelectorAll(".f1la87wm");
+          const titles = parentNode.querySelectorAll(".f3w9jrr.fcckh95");
+
+          if (!configData["isActivate"]) {
+            showElements(darkingElements);
+            showElements(playStopButtons);
+            showElements(roadElements);
+            showElements(titles);
+            return;
+          }
+
+          if (configData["isPreventDarkening"]) {
+            hideElements(darkingElements);
+          } else {
+            showElements(darkingElements);
+          }
+
+          if (configData["isHidePlaypauseButton"]) {
+            hideElements(playStopButtons);
+            hideElements(roadElements);
+          } else {
+            showElements(playStopButtons);
+            showElements(roadElements);
+          }
+
+          if (configData["isHideTitle"]) {
+            hideElements(titles);
+          } else {
+            showElements(titles);
+          }
+        }
+      });
+    });
+  });
+});
+
+const waitLoadPage = () => {
+  console.log("Start CustomUI");
+    //なんとなく中央の再生ボタンが配置されてればページ読み込めているといるだろうという希望的観測
+  const terget = document.querySelector(".fq2lkuj");
+  if (terget) {
+    observer.observe(terget , {
+      childList:true,
+      subtree:true
+    });
+  clearInterval(intervalID);
+  }
+  else{
+      // if now page is not amazon video 
+    numberOfRepetitions++;
+    if (numberOfRepetitions >= repetitionsLimit) {
+      console.log("ClearInterval");
+      clearInterval(intervalID);
+    }
+  }
 }
 
 let numberOfRepetitions = 0;
-const repetitionsLimit = 100;
+const repetitionsLimit = 10;
 let intervalID;
-if (!intervalID) intervalID = setInterval(customizePage, 100);
-
+if (!intervalID) intervalID = setInterval(waitLoadPage, 1000);
