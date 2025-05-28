@@ -54,6 +54,7 @@ const observer = new MutationObserver(records => {
           const parentNode = node.parentElement;
           const darkingElements = parentNode.querySelectorAll(".f8hspre.f1makowq");
           const playStopButtons = parentNode.querySelectorAll(".f1aiijcp.fw80uk2");
+          const loadButton = parentNode.querySelectorAll(".f1dd7ldt");
           const roadElements = parentNode.querySelectorAll(".f1la87wm");
           const titles = parentNode.querySelectorAll(".f3w9jrr.fcckh95");
 
@@ -74,9 +75,12 @@ const observer = new MutationObserver(records => {
           if (configData["isHidePlaypauseButton"]) {
             hideElements(playStopButtons);
             hideElements(roadElements);
+            hideElements(loadButton);
+
           } else {
             showElements(playStopButtons);
             showElements(roadElements);
+            showElements(loadButton);
           }
 
           if (configData["isHideTitle"]) {
