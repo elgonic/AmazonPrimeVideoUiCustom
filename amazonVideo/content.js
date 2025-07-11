@@ -95,17 +95,20 @@ const observer = new MutationObserver(records => {
 //  });
 //});
 
+var beforTarget = null;
 const waitLoadPage = () => {
-  console.log("Start CustomUI");
     //なんとなく中央の再生ボタンが配置されてればページ読み込めているといるだろうという希望的観測
-  const terget = document.querySelector(".dv-player-fullscreen");
-  console.log(terget);
-  if (terget != null) {
-    observer.observe(terget, {
+  const target = document.querySelector(".dv-player-fullscreen");
+  //console.log(target);
+  if (target !== null && beforTarget !== target) {
+    observer.disconnect();
+    console.log("Start CustomUI");
+    observer.observe(target, {
       childList: true,
       subtree: true
     });
-    clearInterval(intervalID);
+    beforTarget = target;
+    //clearInterval(intervalID);
   }
 //  else {
 //      // if now page is not amazon video 
