@@ -23,7 +23,7 @@ const hideElements = elements => {
     if (element.style) {
       element.style.opacity = 0;
       element.style.visibility = "hidden";
-    //  element.style.display = "none";
+      //  element.style.display = "none";
     }
   });
 }
@@ -33,11 +33,12 @@ const showElements = elements => {
     if (element.style) {
       element.style.opacity = 1;
       element.style.visibility = "visible";
-  //    element.style.display = "block";
+      //    element.style.display = "block";
     }
   });
 }
 
+let a = false;
 const observer = new MutationObserver(records => {
 
   console.log("Observe!!");
@@ -48,56 +49,65 @@ const observer = new MutationObserver(records => {
 
     console.log(`isActivate = ${configData["isActivate"]}`);
 
-//    records.forEach(record => {
-//      record.addedNodes.forEach(node => {
-//        if (node.nodeType === Node.ELEMENT_NODE) {
-          //const parentNode = node.parentElement;
-          const parentNode = document;
-          const darkingElements = parentNode.querySelectorAll(".f8hspre.f1makowq");
-          const playStopButtons = parentNode.querySelectorAll(".f1aiijcp.fw80uk2");
-          const loadButton = parentNode.querySelectorAll(".f1dd7ldt");
-          const roadElements = parentNode.querySelectorAll(".f1la87wm");
-          const titles = parentNode.querySelectorAll(".f3w9jrr.fcckh95");
+    const parentNode = document;
+    const parent = parentNode.querySelectorAll(".fq2lkuj");
+    const base1 = parent[0].querySelectorAll(".fkhz08q.f8hspre");
+    const base2 = parent[0].querySelectorAll(".ffszj3z.f8hspre.f1icw8u");
 
-          if (!configData["isActivate"]) {
-            showElements(darkingElements);
-            showElements(playStopButtons);
-            showElements(roadElements);
-            showElements(titles);
-            return;
-          }
+    //並び替え
+    if (base1.length > 0 && base2.length > 0) {
+      console.log("InsertAdjacentHTML");
+      parent[0].after(base1[0]);
+      parent[0].after(base2[0]);
+    }
 
-          if (configData["isPreventDarkening"]) {
-            hideElements(darkingElements);
-          } else {
-            showElements(darkingElements);
-          }
+    const darkingElements = parentNode.querySelectorAll(".f8hspre.f1makowq");
+    const playStopButtons = parentNode.querySelectorAll(".f1aiijcp.fw80uk2");
+    const loadButton = parentNode.querySelectorAll(".f1dd7ldt");
+    const roadElements = parentNode.querySelectorAll(".f1la87wm");
+    const titles = parentNode.querySelectorAll(".f3w9jrr.fcckh95");
 
-          if (configData["isHidePlaypauseButton"]) {
-            hideElements(playStopButtons);
-            hideElements(roadElements);
-            hideElements(loadButton);
+    hideElements(parent);
 
-          } else {
-            showElements(playStopButtons);
-            showElements(roadElements);
-            showElements(loadButton);
-          }
+    if (!configData["isActivate"]) {
+      showElements(darkingElements);
+      showElements(playStopButtons);
+      showElements(roadElements);
+      showElements(titles);
+      return;
+    }
 
-          if (configData["isHideTitle"]) {
-            hideElements(titles);
-          } else {
-            showElements(titles);
-          }
-        });
-    });
+    if (configData["isPreventDarkening"]) {
+      hideElements(darkingElements);
+    } else {
+      showElements(darkingElements);
+    }
+
+    if (configData["isHidePlaypauseButton"]) {
+      hideElements(playStopButtons);
+      hideElements(roadElements);
+      hideElements(loadButton);
+
+    } else {
+      showElements(playStopButtons);
+      showElements(roadElements);
+      showElements(loadButton);
+    }
+
+    if (configData["isHideTitle"]) {
+      hideElements(titles);
+    } else {
+      showElements(titles);
+    }
+  });
+});
 //    });
 //  });
 //});
 
 var beforTarget = null;
 const waitLoadPage = () => {
-    //なんとなく中央の再生ボタンが配置されてればページ読み込めているといるだろうという希望的観測
+  //なんとなく中央の再生ボタンが配置されてればページ読み込めているといるだろうという希望的観測
   const target = document.querySelector(".dv-player-fullscreen");
   //console.log(target);
   if (target !== null && beforTarget !== target) {
@@ -110,14 +120,14 @@ const waitLoadPage = () => {
     beforTarget = target;
     //clearInterval(intervalID);
   }
-//  else {
-//      // if now page is not amazon video 
-//    numberOfRepetitions++;
-//    if (numberOfRepetitions >= repetitionsLimit) {
-//      console.log("ClearInterval");
-//      clearInterval(intervalID);
-//    }
-//  }
+  //  else {
+  //      // if now page is not amazon video 
+  //    numberOfRepetitions++;
+  //    if (numberOfRepetitions >= repetitionsLimit) {
+  //      console.log("ClearInterval");
+  //      clearInterval(intervalID);
+  //    }
+  //  }
 }
 
 let numberOfRepetitions = 0;
