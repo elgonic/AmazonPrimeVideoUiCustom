@@ -23,7 +23,6 @@ const hideElements = elements => {
     if (element.style) {
       element.style.opacity = 0;
       element.style.visibility = "hidden";
-      //  element.style.display = "none";
     }
   });
 }
@@ -33,7 +32,6 @@ const showElements = elements => {
     if (element.style) {
       element.style.opacity = 1;
       element.style.visibility = "visible";
-      //    element.style.display = "block";
     }
   });
 }
@@ -49,11 +47,26 @@ const observer = new MutationObserver(records => {
 
     console.log(`isActivate = ${configData["isActivate"]}`);
 
-    const parentNode = document;
+    const parentNode = document.getElementById("dv-web-player");
+    if(parentNode){
+      HideProcess( configData , parentNode)
+    }
+
+    const parentNode2 = document.getElementById("dv-web-player-2");
+    if(parentNode2){
+      HideProcess( configData , parentNode2)
+    }
+
+  });
+});
+
+const HideProcess = (configData , parentNode) => {
     const parent = parentNode.querySelectorAll(".fq2lkuj");
     const base1 = parent[0].querySelectorAll(".fkhz08q.f8hspre");
     const base2 = parent[0].querySelectorAll(".ffszj3z.f8hspre.f1icw8u");
 
+    console.log(parent)
+    console.log(base1)
     //並び替え
     if (base1.length > 0 && base2.length > 0) {
       console.log("InsertAdjacentHTML");
@@ -99,11 +112,7 @@ const observer = new MutationObserver(records => {
     } else {
       showElements(titles);
     }
-  });
-});
-//    });
-//  });
-//});
+}
 
 var beforTarget = null;
 const waitLoadPage = () => {
